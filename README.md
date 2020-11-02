@@ -2,7 +2,7 @@
 
 ## Overview
 
-This package demonstrates the usage of a ROS publisher and subscriber.
+This package demonstrates the usage of a ROS service and client.
 Refer to the following tutorials for more details:-
 
 http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki (Links to an external site.)
@@ -20,6 +20,12 @@ http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics (Links to an external site
 http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29 (Links to an external site.)
 
 http://wiki.ros.org/ROS/Tutorials/ExaminingPublisherSubscriber
+
+http://wiki.ros.org/ROS/Tutorials/Getting%20started%20with%20roswtf (Links to an external site.)
+
+http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams (Links to an external site.)
+
+http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch
 
 ## Dependencies
 
