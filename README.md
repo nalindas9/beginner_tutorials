@@ -56,3 +56,13 @@ cd catkin_ws
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
+## Calling rosservice with command line tools
+Terminal 3:
+```
+rosservice call /add_two_ints 1 4
+```
+
+## Running launch file
+```
+roslaunch beginner_tutorials addtwoints.launch a:=4 b:=5
+```
