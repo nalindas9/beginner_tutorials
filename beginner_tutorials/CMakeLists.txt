@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   genmsg
+  tf
 )
 add_message_files(
   FILES

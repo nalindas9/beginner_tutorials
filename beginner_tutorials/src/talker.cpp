@@ -34,10 +34,10 @@
  *
  */
 #include <sstream>
+#include <tf/transform_broadcaster.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/AddTwoInts.h"
-
 
 /**
  * @brief Add two integers function
@@ -75,6 +75,24 @@ int main(int argc, char **argv) {
   ros::ServiceServer service = n.advertiseService("add_two_ints", add);
   ROS_WARN_STREAM("ROS service might take time to start ... ");
   ROS_INFO_STREAM("Ready to add two ints.");
+
+  while (1) {
+    // Transform broadcaster
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+  transform.setOrigin(tf::Vector3(2.0, 3.0, 4.0));
+  tf::Quaternion q;
+  q.setRPY(0.5, 0.3, 0.7);
+  transform.setRotation(q);
+  br.sendTransform(tf::StampedTransform(transform, 
+                                        ros::Time::now(), 
+                                        "world", 
+                                        "talk"));
+  loop_rate.sleep();
+  }
+  
+
+
   ros::spin();
 
 
