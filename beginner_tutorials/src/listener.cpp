@@ -38,6 +38,18 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/AddTwoInts.h"
 
+
+/**
+ * @brief Chatter topic subscriber callback
+ * @param msg Message recieved on Chatter topic
+ * @return None
+ * **/
+
+void chatterCallback(const std_msgs::String::ConstPtr& msg)
+  {
+    ROS_INFO("I heard: [%s]", msg->data.c_str());
+  }
+  
 /**
  * @brief Main function
  * @param argc Command line number of arguments
@@ -58,19 +70,23 @@ int main(int argc, char **argv) {
   // Create ROS nodehandle object
   ros::NodeHandle n;
 
+  // ROS Subscriber
+  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+
   // Service client
   ros::ServiceClient client = n.serviceClient<beginner_tutorials::AddTwoInts>("add_two_ints");
   beginner_tutorials::AddTwoInts srv;
   srv.request.a = atoll(argv[1]);
   srv.request.b = atoll(argv[2]);
   // If call to service successfull then displace sum
-  if (client.call(srv)) {
-    ROS_INFO_STREAM("Sum: " << (long int)srv.response.sum);
-  } else {
-    ROS_ERROR_STREAM("Failed to call service add_two_ints");
-    ROS_FATAL_STREAM("Failed to call service add_two_ints!!");
-    return 1;
-  }
+  // if (client.call(srv)) {
+  //   ROS_INFO_STREAM("Sum: " << (long int)srv.response.sum);
+  // } else {
+  //   ROS_ERROR_STREAM("Failed to call service add_two_ints");
+  //   ROS_FATAL_STREAM("Failed to call service add_two_ints!!");
+  //   return 1;
+  // }
 
+  ros::spin();
   return 0;
 }

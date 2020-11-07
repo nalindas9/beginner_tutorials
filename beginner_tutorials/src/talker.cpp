@@ -71,13 +71,14 @@ int main(int argc, char **argv) {
 
   ROS_DEBUG_STREAM("Talker started ...");
   
+  // ROS publisher
+  ros::Publisher chatterPub = n.advertise<std_msgs::String>("chatter", 1000);
   // Advertise ros service
   ros::ServiceServer service = n.advertiseService("add_two_ints", add);
   ROS_WARN_STREAM("ROS service might take time to start ... ");
   ROS_INFO_STREAM("Ready to add two ints.");
 
-  ros::spin();
-
+  
   while (ros::ok()) {
       // Transform broadcaster
     static tf::TransformBroadcaster br;
@@ -90,9 +91,16 @@ int main(int argc, char **argv) {
                                           ros::Time::now(), 
                                           "world", 
                                           "talk"));
+    std_msgs::String msg;
+    std::stringstream ss;
+    ss << "hello world";
+    msg.data = ss.str();
+    chatterPub.publish(msg);
+    ros::spinOnce();
     loop_rate.sleep();
   }
 
+  ros::spin();
 
   return 0;
 }
