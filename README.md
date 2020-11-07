@@ -2,7 +2,7 @@
 
 ## Overview
 
-This package demonstrates the usage of a ROS service and client.
+This package demonstrates the usage of a ROS service, client, publisher, subscriber and ROS TF.
 Refer to the following tutorials for more details:-
 
 http://wiki.ros.org/ROS/Tutorials/NavigatingTheWiki (Links to an external site.)
@@ -26,6 +26,24 @@ http://wiki.ros.org/ROS/Tutorials/Getting%20started%20with%20roswtf (Links to an
 http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams (Links to an external site.)
 
 http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch
+
+http://wiki.ros.org/rostest/Writing (Links to an external site.)
+
+http://wiki.ros.org/gtest (Links to an external site.)
+
+http://wiki.ros.org/ROS/Tutorials/Recording%20and%20playing%20back%20data (Links to an external site.)
+
+http://wiki.ros.org/tf/Tutorials/Introduction%20to%20tf (Links to an external site.)
+
+http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28C%2B%2B%29 (Links to an external site.)
+
+http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20listener%20%28C%2B%2B%29 (Links to an external site.)
+
+http://wiki.ros.org/tf/Tutorials/Adding%20a%20frame%20%28C%2B%2B%29 (Links to an external site.)
+
+http://wiki.ros.org/tf/Tutorials/tf%20and%20Time%20%28C%2B%2B%29 (Links to an external site.)
+
+http://wiki.ros.org/tf/Tutorials/Time%20travel%20with%20tf%20%28C%2B%2B%29
 
 ## Dependencies
 
@@ -71,4 +89,39 @@ rosservice call /add_two_ints 1 4
 ## Running launch file
 ```
 roslaunch beginner_tutorials addtwoints.launch a:=4 b:=5
+```
+## Inspect tf frames
+```
+cd catkin_ws
+source devel/setup.bash
+rosrun rqt_tf_tree rqt_tf_tree
+```
+## Running rostest
+```
+cd catkin_ws
+source devel/setup.bash
+roslaunch talker_test.launch a:=2 b:=5
+```
+## Recording rosbag
+```
+cd catkin_ws
+source devel/setup.bash
+roslaunch addTwoInts.launch record:=true
+```
+## Inspecting rosbag file
+```
+cd catkin_ws/src/beginner_tutorials/results
+rosbag info beginner_tutorials.bag
+```
+## Playback rosbag file with listener node
+Terminal 1
+```
+cd catkin_ws/src/beginner_tutorials/results
+rosbag play beginner_tutorials.bag
+```
+Terminal 2
+```
+cd catkin_ws
+source devel/setup.bash
+rosrun beginner_tutorials listener
 ```
